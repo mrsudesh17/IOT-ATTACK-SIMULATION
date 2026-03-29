@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Dashboard — View captured credentials from the IoT phishing simulation.">
+    <title>Admin Dashboard — IoT Phishing Simulation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Educational Disclaimer -->
+    <div class="disclaimer-banner">
+        <span class="icon">⚠️</span>
+        This is a cybersecurity educational simulation. Do not enter real credentials.
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="logo">
+            <span class="logo-icon">🛡️</span>
+            IoT Phishing Simulation
+        </div>
+        <nav>
+            <a href="/panel">Panel</a>
+            <a href="/admin">Admin</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="card">
+            <div class="admin-header">
+                <h1>📊 Captured Credentials</h1>
+                <span class="entry-count">{{ entries | length }} record{{ 's' if entries | length != 1 else '' }}</span>
+            </div>
+
+            {% if entries %}
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Timestamp</th>
+                            <th>Scenario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in entries %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ entry.username }}</td>
+                            <td>
+                                <span class="masked" data-real="{{ entry.password }}">••••••••</span>
+                                <button class="reveal-btn btn" style="
+                                    padding: 3px 10px;
+                                    font-size: 0.72rem;
+                                    margin-left: 8px;
+                                    background: var(--clr-bg);
+                                    border: 1px solid var(--clr-border);
+                                    border-radius: 4px;
+                                    color: var(--clr-text-muted);
+                                    cursor: pointer;
+                                ">Show</button>
+                            </td>
+                            <td>{{ entry.timestamp }}</td>
+                            <td>
+                                {% if entry.scenario == 'storage' %}
+                                    <span class="badge badge-reward">Storage</span>
+                                {% elif entry.scenario == 'warranty' %}
+                                    <span class="badge badge-fear">Warranty</span>
+                                {% elif entry.scenario == 'security' %}
+                                    <span class="badge badge-urgency">Security</span>
+                                {% else %}
+                                    <span class="badge" style="background:#e2e8f0;color:#475569;">{{ entry.scenario }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">📭</div>
+                <p>No credentials captured yet.</p>
+                <p style="font-size: 0.82rem; margin-top: 8px;">
+                    Go to the <a href="/panel">Control Panel</a> to start a simulation.
+                </p>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        IoT Phishing Simulation &copy; 2026 — For Educational Purposes Only
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

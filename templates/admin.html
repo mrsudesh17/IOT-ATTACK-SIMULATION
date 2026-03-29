@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard — IoT Phishing Simulation{% endblock %}
+{% block body_class %}admin-page{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+
+    <!-- Admin Header -->
+    <div class="admin-header">
+        <div class="admin-title-row">
+            <h1 class="admin-title">📊 Admin Dashboard</h1>
+            <a href="/panel" class="admin-back-link">← Back to Panel</a>
+        </div>
+        <p class="admin-subtitle">Credential capture log & attack statistics — <em>Academic demonstration data only</em></p>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+        <div class="stat-card stat-total">
+            <div class="stat-number">{{ stats.total }}</div>
+            <div class="stat-label">Total Captures</div>
+        </div>
+        <div class="stat-card stat-storage">
+            <div class="stat-number">{{ stats.by_scenario.storage }}</div>
+            <div class="stat-label">☁️ Storage</div>
+        </div>
+        <div class="stat-card stat-warranty">
+            <div class="stat-number">{{ stats.by_scenario.warranty }}</div>
+            <div class="stat-label">🛡️ Warranty</div>
+        </div>
+        <div class="stat-card stat-security">
+            <div class="stat-number">{{ stats.by_scenario.security }}</div>
+            <div class="stat-label">🔒 Security</div>
+        </div>
+    </div>
+
+    <!-- Last Capture -->
+    <div class="last-capture-card">
+        <h3>Last Capture</h3>
+        {% if stats.last_entry %}
+        <div class="last-capture-details">
+            <span class="capture-field"><strong>Time:</strong> {{ stats.last_entry.timestamp }}</span>
+            <span class="capture-field"><strong>IP:</strong> {{ stats.last_entry.get('ip', 'N/A') }}</span>
+            <span class="capture-field"><strong>Scenario:</strong> {{ stats.last_entry.get('scenario', 'N/A') }}</span>
+            <span class="capture-field"><strong>Username:</strong> {{ stats.last_entry.get('username', 'N/A') }}</span>
+        </div>
+        {% else %}
+        <p class="no-data">No captures recorded yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Credentials Table -->
+    <div class="log-table-section">
+        <div class="table-header-row">
+            <h2 class="table-title">Captured Credentials Log</h2>
+            <form action="/admin/clear" method="POST" class="clear-form"
+                  onsubmit="return confirm('Are you sure you want to clear all logs?');">
+                <button type="submit" class="clear-btn" id="btn-clear-logs">🗑️ Clear Logs</button>
+            </form>
+        </div>
+
+        {% if stats.entries %}
+        <div class="table-wrapper">
+            <table class="log-table" id="log-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Timestamp</th>
+                        <th>IP Address</th>
+                        <th>Scenario</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in stats.entries|reverse %}
+                    <tr>
+                        <td class="row-num">{{ stats.entries|length - loop.index0 }}</td>
+                        <td>{{ entry.get('timestamp', 'N/A') }}</td>
+                        <td><code>{{ entry.get('ip', 'N/A') }}</code></td>
+                        <td>
+                            <span class="scenario-badge badge-{{ entry.get('scenario', 'storage') }}">
+                                {{ entry.get('scenario', 'N/A') }}
+                            </span>
+                        </td>
+                        <td><code>{{ entry.get('username', 'N/A') }}</code></td>
+                        <td><code>{{ entry.get('password', 'N/A') }}</code></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <p>No credential captures recorded yet.</p>
+            <p class="empty-hint">Launch an attack scenario from the <a href="/panel">Control Panel</a> to begin.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if demo %}
+    <div class="demo-notice">
+        <strong>🔶 Demo Mode Active</strong> — Credentials are logged to console only, not written to disk.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

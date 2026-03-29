@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}QR Code — Lure Link{% endblock %}
+{% block body_class %}qrcode-page{% endblock %}
+
+{% block content %}
+<div class="qrcode-container">
+    <div class="qrcode-card">
+        <h1 class="qrcode-title">📱 QR Code — Lure Link</h1>
+        <p class="qrcode-subtitle">Scan this code to access the phishing lure page</p>
+
+        {% if qr_data %}
+        <div class="qrcode-image-wrapper">
+            <img src="data:image/png;base64,{{ qr_data }}" alt="QR Code for lure page" class="qrcode-image" id="qr-image">
+        </div>
+        {% else %}
+        <div class="qrcode-error">
+            <p>⚠️ QR code generation unavailable.</p>
+            <p>Install the required library: <code>pip install qrcode[pil]</code></p>
+        </div>
+        {% endif %}
+
+        <div class="qrcode-url">
+            <label>Lure URL:</label>
+            <div class="url-display">
+                <code id="lure-url">{{ lure_url }}</code>
+                <button onclick="copyUrl()" class="copy-btn" id="btn-copy-url">📋 Copy</button>
+            </div>
+        </div>
+
+        <div class="qrcode-info">
+            <p><strong>Usage:</strong> Display this QR code on a projector or share the URL during a live demo.
+            Participants will land on the lure page for scenario: <strong>{{ scenario_id }}</strong></p>
+        </div>
+
+        <div class="qrcode-actions">
+            <a href="/panel" class="qr-btn btn-back">← Back to Panel</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function copyUrl() {
+    const url = document.getElementById('lure-url').textContent;
+    navigator.clipboard.writeText(url).then(function() {
+        const btn = document.getElementById('btn-copy-url');
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => { btn.textContent = '📋 Copy'; }, 2000);
+    });
+}
+</script>
+{% endblock %}

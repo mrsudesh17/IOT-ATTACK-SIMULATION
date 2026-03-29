@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IoT Device Notification — Claim your offer now.">
+    <title>{{ scenario.title }} — IoT Notification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Educational Disclaimer -->
+    <div class="disclaimer-banner">
+        <span class="icon">⚠️</span>
+        This is a cybersecurity educational simulation. Do not enter real credentials.
+    </div>
+
+    <!-- Header -->
+    <header class="site-header" style="background: linear-gradient(135deg, {{ scenario.color }} 0%, {{ scenario.color }}cc 100%);">
+        <div class="logo">
+            <span class="logo-icon">📡</span>
+            IoT Device Notification Center
+        </div>
+        <nav>
+            <a href="/panel" style="color: rgba(255,255,255,0.85);">Panel</a>
+        </nav>
+    </header>
+
+    <!-- Lure Content -->
+    <main class="container narrow">
+        <div class="card lure-hero">
+            <div class="hero-icon">{{ scenario.icon }}</div>
+            <h1>{{ scenario.hook }}</h1>
+            <p>{{ scenario.description }}</p>
+            <a href="/login?type={{ scenario_key }}" class="btn btn-primary" style="background: {{ scenario.color }};">
+                Proceed to Login →
+            </a>
+        </div>
+
+        <!-- QR Code Section -->
+        <div class="qr-section">
+            <p><strong>Or scan this QR code on your mobile device:</strong></p>
+            <img src="/qrcode?type={{ scenario_key }}" alt="QR code for the entry page" width="160" height="160">
+            <p>Quick access from any device on the network</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        IoT Phishing Simulation &copy; 2026 — For Educational Purposes Only
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

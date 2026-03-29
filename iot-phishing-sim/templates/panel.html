@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IoT Phishing Simulation Control Panel — Select a phishing scenario for educational demonstration.">
+    <title>Control Panel — IoT Phishing Simulation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Educational Disclaimer -->
+    <div class="disclaimer-banner">
+        <span class="icon">⚠️</span>
+        This is a cybersecurity educational simulation. Do not enter real credentials.
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="logo">
+            <span class="logo-icon">🛡️</span>
+            IoT Phishing Simulation (SET-Inspired)
+        </div>
+        <nav>
+            <a href="/panel">Panel</a>
+            <a href="/admin">Admin</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="card">
+            <h1 class="card-title">Phishing Scenario Control Panel</h1>
+            <p class="card-subtitle">Select a social-engineering scenario to launch the simulation.</p>
+
+            <!-- Hidden input to track selected scenario -->
+            <input type="hidden" id="scenario-type" value="storage">
+
+            <!-- Scenario Cards Grid -->
+            <div class="scenario-grid">
+
+                <!-- 1. Free Cloud Storage (Reward) -->
+                <div class="scenario-card" data-type="storage">
+                    <div class="scenario-icon">☁️</div>
+                    <h3>Free Cloud Storage</h3>
+                    <p>Lure the target with a complimentary 50 GB cloud-storage upgrade for their IoT hub.</p>
+                    <span class="badge badge-reward">Reward</span>
+                </div>
+
+                <!-- 2. Warranty Expiry (Fear) -->
+                <div class="scenario-card" data-type="warranty">
+                    <div class="scenario-icon">⚠️</div>
+                    <h3>Warranty Expiry Notice</h3>
+                    <p>Frighten the target with an expiring warranty on their connected security camera.</p>
+                    <span class="badge badge-fear">Fear</span>
+                </div>
+
+                <!-- 3. Security Alert (Urgency) -->
+                <div class="scenario-card" data-type="security">
+                    <div class="scenario-icon">🔒</div>
+                    <h3>Critical Security Alert</h3>
+                    <p>Create urgency with a fake unauthorized-access notification on their home router.</p>
+                    <span class="badge badge-urgency">Urgency</span>
+                </div>
+
+            </div>
+
+            <!-- Start Button -->
+            <div class="text-center">
+                <button id="start-btn" class="btn btn-primary btn-block">
+                    🚀 Start Simulation
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        IoT Phishing Simulation &copy; 2026 — For Educational Purposes Only
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

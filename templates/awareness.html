@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+{% block title %}Security Awareness — What Just Happened{% endblock %}
+{% block body_class %}awareness-page{% endblock %}
+
+{% block content %}
+<div class="awareness-container">
+
+    <!-- Reveal Header -->
+    <div class="awareness-header">
+        <div class="awareness-alert-icon">🚨</div>
+        <h1 class="awareness-title">You Were Just Phished</h1>
+        <p class="awareness-subtitle">
+            Don't worry — this was a <strong>controlled educational simulation</strong>.
+            Your data has not been transmitted to any external server.
+        </p>
+    </div>
+
+    <!-- Section 1: What Happened -->
+    <div class="awareness-section" id="section-what-happened">
+        <div class="section-number">1</div>
+        <h2 class="section-title">What Just Happened?</h2>
+        <div class="section-content">
+            <p>You just experienced a simulated <strong>phishing attack</strong> designed to demonstrate how IoT device users are targeted by cybercriminals.</p>
+
+            <div class="attack-flow">
+                <div class="flow-step">
+                    <div class="flow-icon">📧</div>
+                    <div class="flow-label">Lure Delivered</div>
+                    <div class="flow-desc">You received a convincing notification from "{{ scenario.brand_name }}"</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-icon">🎣</div>
+                    <div class="flow-label">Bait Clicked</div>
+                    <div class="flow-desc">You clicked the call-to-action button</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-icon">🔐</div>
+                    <div class="flow-label">Credentials Entered</div>
+                    <div class="flow-desc">You entered credentials on a fake login page</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-icon">📋</div>
+                    <div class="flow-label">Data Captured</div>
+                    <div class="flow-desc">Your credentials were logged by the attacker</div>
+                </div>
+            </div>
+
+            <div class="scenario-used">
+                <strong>Scenario used:</strong>
+                <span class="scenario-tag" style="background: {{ scenario.color }}20; color: {{ scenario.color }}; border: 1px solid {{ scenario.color }}50;">
+                    {{ scenario.icon }} {{ scenario.name }}
+                </span>
+                <span class="hook-type">— <em>{{ scenario.hook|capitalize }} principle</em></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: Why It Worked -->
+    <div class="awareness-section" id="section-why-it-worked">
+        <div class="section-number">2</div>
+        <h2 class="section-title">Why It Worked</h2>
+        <div class="section-content">
+            <p>Phishing attacks exploit <strong>psychological principles</strong> identified by Robert Cialdini's research on influence and persuasion:</p>
+
+            <div class="principle-cards">
+                <div class="principle-card {% if scenario.hook == 'reward' %}principle-active{% endif %}">
+                    <div class="principle-icon">🎁</div>
+                    <h3>Reward / Reciprocity</h3>
+                    <p>Offering something free or valuable creates a sense of obligation and lowers defenses.</p>
+                    <div class="principle-example">"Upgrade your storage for FREE"</div>
+                </div>
+                <div class="principle-card {% if scenario.hook == 'fear' %}principle-active{% endif %}">
+                    <div class="principle-icon">😰</div>
+                    <h3>Fear / Urgency</h3>
+                    <p>Time pressure and fear of loss reduce critical thinking and encourage hasty decisions.</p>
+                    <div class="principle-example">"Your warranty expires TOMORROW"</div>
+                </div>
+                <div class="principle-card {% if scenario.hook == 'authority' %}principle-active{% endif %}">
+                    <div class="principle-icon">🏛️</div>
+                    <h3>Authority / Trust</h3>
+                    <p>Official-looking branding and authoritative language creates implicit trust.</p>
+                    <div class="principle-example">"Critical Security Advisory — CVE-2026"</div>
+                </div>
+            </div>
+
+            <div class="key-insight">
+                <span class="insight-icon">💡</span>
+                <p><strong>Key takeaway:</strong> Social engineering targets <em>human psychology</em>, not software vulnerabilities. Even technically skilled users can be deceived when emotional triggers bypass rational analysis.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: How to Protect Yourself -->
+    <div class="awareness-section" id="section-protection">
+        <div class="section-number">3</div>
+        <h2 class="section-title">How to Protect Yourself</h2>
+        <div class="section-content">
+            <div class="protection-grid">
+                <div class="protection-item">
+                    <div class="protect-icon">🔍</div>
+                    <h3>Verify URLs Carefully</h3>
+                    <p>Always check the domain name before entering credentials. Look for misspellings and suspicious subdomains.</p>
+                </div>
+                <div class="protection-item">
+                    <div class="protect-icon">🔗</div>
+                    <h3>Don't Click Unsolicited Links</h3>
+                    <p>Navigate to services directly through bookmarks or by typing the URL manually.</p>
+                </div>
+                <div class="protection-item">
+                    <div class="protect-icon">🔑</div>
+                    <h3>Enable Two-Factor Authentication</h3>
+                    <p>2FA adds a second layer even if credentials are compromised. Use it on all IoT accounts.</p>
+                </div>
+                <div class="protection-item">
+                    <div class="protect-icon">📱</div>
+                    <h3>Update IoT Firmware</h3>
+                    <p>Always update through the official device app or manufacturer's website, never through email links.</p>
+                </div>
+                <div class="protection-item">
+                    <div class="protect-icon">🔒</div>
+                    <h3>Change Default Passwords</h3>
+                    <p>IoT devices often ship with default credentials. Change them immediately after setup.</p>
+                </div>
+                <div class="protection-item">
+                    <div class="protect-icon">📶</div>
+                    <h3>Segment Your Network</h3>
+                    <p>Place IoT devices on a separate network/VLAN to limit the blast radius of compromises.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Phishing Indicators -->
+    <div class="awareness-section" id="section-indicators">
+        <div class="section-number">4</div>
+        <h2 class="section-title">Spot the Phishing Indicators</h2>
+        <div class="section-content">
+            <p>Learn to recognize these red flags in suspicious communications:</p>
+
+            <div class="indicators-checklist">
+                <div class="indicator red-flag">
+                    <span class="indicator-icon">❌</span>
+                    <div class="indicator-content">
+                        <strong>Generic greeting</strong>
+                        <p>"Dear User" or "Dear Customer" instead of your actual name</p>
+                    </div>
+                </div>
+                <div class="indicator red-flag">
+                    <span class="indicator-icon">❌</span>
+                    <div class="indicator-content">
+                        <strong>Urgency language</strong>
+                        <p>"Act now!", "Expires today!", "Immediate action required"</p>
+                    </div>
+                </div>
+                <div class="indicator red-flag">
+                    <span class="indicator-icon">❌</span>
+                    <div class="indicator-content">
+                        <strong>Suspicious URL / domain</strong>
+                        <p>Misspelled domains, unusual subdomains, or IP-based URLs</p>
+                    </div>
+                </div>
+                <div class="indicator red-flag">
+                    <span class="indicator-icon">❌</span>
+                    <div class="indicator-content">
+                        <strong>Credential request via link</strong>
+                        <p>Legitimate services rarely ask you to "verify" credentials through email links</p>
+                    </div>
+                </div>
+                <div class="indicator red-flag">
+                    <span class="indicator-icon">❌</span>
+                    <div class="indicator-content">
+                        <strong>No HTTPS or certificate warnings</strong>
+                        <p>Missing padlock icon or browser security warnings</p>
+                    </div>
+                </div>
+                <div class="indicator red-flag">
+                    <span class="indicator-icon">❌</span>
+                    <div class="indicator-content">
+                        <strong>Too-good-to-be-true offers</strong>
+                        <p>"FREE upgrade", "You've won", or unexpected rewards</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparison -->
+            <div class="comparison-box">
+                <div class="comparison-side legit">
+                    <h3>✅ Legitimate Notification</h3>
+                    <ul>
+                        <li>Addresses you by name</li>
+                        <li>Comes from official domain</li>
+                        <li>No urgency pressure</li>
+                        <li>Links to known, correct URLs</li>
+                        <li>Doesn't ask for passwords</li>
+                    </ul>
+                </div>
+                <div class="comparison-side phish">
+                    <h3>🚫 Phishing Attempt</h3>
+                    <ul>
+                        <li>Generic "Dear User" greeting</li>
+                        <li>Spoofed or misspelled domain</li>
+                        <li>"Act NOW or lose access!"</li>
+                        <li>Links to suspicious URLs</li>
+                        <li>Requests login credentials</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Panel -->
+    <div class="awareness-footer">
+        <a href="/panel" class="awareness-back-btn" id="btn-back-panel">← Return to Control Panel</a>
+    </div>
+</div>
+{% endblock %}

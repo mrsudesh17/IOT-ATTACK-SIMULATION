@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Phishing Awareness — Learn how this simulated attack worked and how to protect yourself.">
+    <title>Phishing Awareness — IoT Security</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Educational Disclaimer -->
+    <div class="disclaimer-banner">
+        <span class="icon">⚠️</span>
+        This is a cybersecurity educational simulation. Do not enter real credentials.
+    </div>
+
+    <!-- Header -->
+    <header class="site-header" style="background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);">
+        <div class="logo">
+            <span class="logo-icon">🛡️</span>
+            Cybersecurity Awareness
+        </div>
+        <nav>
+            <a href="/panel" style="color: rgba(255,255,255,0.85);">Back to Panel</a>
+        </nav>
+    </header>
+
+    <main class="container" style="max-width: 720px;">
+
+        <!-- Header Section -->
+        <div class="awareness-header">
+            <div class="shield-icon">🚨</div>
+            <h1>You Were Just Phished!</h1>
+            <p>Don't worry — this was a <strong>controlled educational simulation</strong>. No real data was compromised. Let's learn what happened.</p>
+        </div>
+
+        <div class="card mb-md">
+            <h2 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;">
+                🔍 What Just Happened?
+            </h2>
+
+            <div class="info-box">
+                <h3>📧 The Lure</h3>
+                <p style="font-size: 0.88rem; color: var(--clr-text-muted);">
+                    You received a "<strong>{{ scenario.title }}</strong>" notification that used
+                    <strong>{{ scenario.tactic }}</strong> to manipulate you into clicking a link.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h3>🎣 The Hook</h3>
+                <p style="font-size: 0.88rem; color: var(--clr-text-muted);">
+                    The link took you to a <strong>fake login page</strong> designed to look like a legitimate
+                    IoT device portal. You entered your credentials willingly.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h3>💾 The Capture</h3>
+                <p style="font-size: 0.88rem; color: var(--clr-text-muted);">
+                    Your username and password were <strong>silently harvested</strong> and stored. In a real
+                    attack, an adversary would now have full access to your device.
+                </p>
+            </div>
+        </div>
+
+        <!-- Why it Worked -->
+        <div class="card mb-md">
+            <h2 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;">
+                ❓ Why This Attack Worked
+            </h2>
+
+            <div class="info-box">
+                <ul>
+                    <li>The message created a sense of <strong>{{ scenario.tactic | lower }}</strong>, bypassing rational judgment.</li>
+                    <li>The fake portal mimicked a <strong>legitimate IoT device interface</strong>.</li>
+                    <li>There was no visible warning that the URL was suspicious.</li>
+                    <li>IoT devices rarely have advanced security UI, making spoofing easy.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Phishing Indicators -->
+        <div class="card mb-md">
+            <h2 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;">
+                🔎 Phishing Red Flags to Watch For
+            </h2>
+
+            <div class="phishing-indicator">
+                <span class="indicator-icon">🌐</span>
+                <div>
+                    <strong>URL Mismatch:</strong> The URL did not belong to the actual IoT manufacturer
+                    (e.g., <code>localhost:5000</code> instead of <code>cloud.manufacturer.com</code>).
+                </div>
+            </div>
+
+            <div class="phishing-indicator">
+                <span class="indicator-icon">⏰</span>
+                <div>
+                    <strong>Artificial Urgency:</strong> Phrases like "expires today", "unauthorized access",
+                    or "act now" pressure you into hasty actions.
+                </div>
+            </div>
+
+            <div class="phishing-indicator">
+                <span class="indicator-icon">🎁</span>
+                <div>
+                    <strong>Too-Good-To-Be-True Offers:</strong> Free storage upgrades or surprise rewards
+                    are classic social-engineering baits.
+                </div>
+            </div>
+
+            <div class="phishing-indicator">
+                <span class="indicator-icon">🔓</span>
+                <div>
+                    <strong>No HTTPS / Certificate Warning:</strong> Legitimate portals use HTTPS.
+                    This simulation ran over plain HTTP on localhost.
+                </div>
+            </div>
+
+            <div class="phishing-indicator">
+                <span class="indicator-icon">📋</span>
+                <div>
+                    <strong>Generic Credentials Request:</strong> Legitimate services rarely ask you to
+                    re-enter passwords through an email link.
+                </div>
+            </div>
+        </div>
+
+        <!-- Prevention Tips -->
+        <div class="card mb-md">
+            <h2 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 16px;">
+                ✅ How to Protect Yourself
+            </h2>
+
+            <div class="info-box">
+                <ul>
+                    <li><strong>Verify URLs</strong> — Always check that the domain matches the official manufacturer.</li>
+                    <li><strong>Enable 2FA</strong> — Use two-factor authentication on all IoT management portals.</li>
+                    <li><strong>Don't click email links</strong> — Navigate to the portal manually via your browser.</li>
+                    <li><strong>Update firmware</strong> — Keep IoT devices updated with the latest security patches.</li>
+                    <li><strong>Use a password manager</strong> — Auto-fill won't work on fake domains, alerting you.</li>
+                    <li><strong>Segment your network</strong> — Isolate IoT devices on a separate VLAN.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Back to Panel -->
+        <div class="text-center mt-md">
+            <a href="/panel" class="btn btn-outline">← Back to Control Panel</a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        IoT Phishing Simulation &copy; 2026 — For Educational Purposes Only
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

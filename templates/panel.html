@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}SET Control Panel — IoT Attack Simulation{% endblock %}
+{% block body_class %}panel-page{% endblock %}
+
+{% block content %}
+<div class="panel-container">
+    <!-- Terminal Header -->
+    <div class="terminal-header">
+        <div class="terminal-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+        </div>
+        <span class="terminal-title">IoT-SET — Social Engineering Toolkit for IoT</span>
+    </div>
+
+    <div class="terminal-body">
+        <!-- ASCII Banner -->
+        <pre class="ascii-banner">
+ ___    _____   ____  ___ _____
+|_ _|__|_   _| / ___|| __|_   _|
+ | |/ _ \| |   \___ \| _|  | |
+ |_|\___/|_|   |____/|___| |_|
+ IoT Social Engineering Toolkit
+ v1.0 — Educational Simulation
+        </pre>
+
+        <div class="terminal-line">
+            <span class="prompt">root@iot-set:~$</span>
+            <span class="typed-text">select_attack_vector</span>
+        </div>
+
+        <div class="terminal-divider"></div>
+
+        <p class="terminal-output">Select an IoT phishing attack scenario:</p>
+        <p class="terminal-output dim">─────────────────────────────────────────</p>
+
+        <!-- Scenario Selection -->
+        <div class="scenario-list">
+            {% for key, sc in scenarios.items() %}
+            <a href="/set-scenario/{{ key }}" class="scenario-option" id="scenario-{{ key }}">
+                <div class="scenario-number">{{ sc.icon }}</div>
+                <div class="scenario-info">
+                    <span class="scenario-label">{{ sc.menu_label }}</span>
+                    <span class="scenario-desc">{{ sc.description }}</span>
+                </div>
+                <div class="scenario-hook-badge badge-{{ sc.hook }}">{{ sc.hook|upper }}</div>
+                <span class="scenario-arrow">→</span>
+            </a>
+            {% endfor %}
+        </div>
+
+        <p class="terminal-output dim" style="margin-top: 1.5rem;">─────────────────────────────────────────</p>
+
+        <!-- Quick Actions -->
+        <div class="panel-actions">
+            <a href="/admin" class="panel-btn btn-secondary" id="btn-admin">
+                <span class="btn-icon">📊</span> Admin Dashboard
+            </a>
+            <a href="/qrcode" class="panel-btn btn-secondary" id="btn-qrcode">
+                <span class="btn-icon">📱</span> Generate QR Code
+            </a>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="panel-status">
+            <div class="status-item">
+                <span class="status-dot status-active"></span>
+                <span>Server: Active</span>
+            </div>
+            <div class="status-item">
+                <span class="status-dot {% if demo %}status-demo{% else %}status-live{% endif %}"></span>
+                <span>Mode: {% if demo %}DEMO{% else %}LIVE{% endif %}</span>
+            </div>
+            <div class="status-item">
+                <span class="status-dot status-active"></span>
+                <span>Scenarios: {{ scenarios|length }}</span>
+            </div>
+        </div>
+
+        <!-- Ethical Notice -->
+        <div class="ethical-notice">
+            <p><strong>⚠️ Ethical Usage Notice</strong></p>
+            <p>This tool is designed for educational demonstrations in controlled academic environments.
+            Unauthorized use against real targets is <strong>illegal</strong> and <strong>unethical</strong>.
+            Always obtain explicit consent before conducting any security testing.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

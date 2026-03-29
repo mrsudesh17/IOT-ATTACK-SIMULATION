@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IoT Device Login Portal — Secure access to your device.">
+    <title>Device Login — IoT Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Educational Disclaimer -->
+    <div class="disclaimer-banner">
+        <span class="icon">⚠️</span>
+        This is a cybersecurity educational simulation. Do not enter real credentials.
+    </div>
+
+    <!-- Header styled as an IoT device portal -->
+    <header class="site-header">
+        <div class="logo">
+            <span class="logo-icon">📡</span>
+            IoT Device Portal
+        </div>
+    </header>
+
+    <!-- Login Form -->
+    <div class="login-wrapper">
+        <div class="card login-card">
+            <!-- Device status indicator -->
+            <div class="device-label">
+                <span class="dot"></span>
+                Device Online — Secure Connection
+            </div>
+
+            <h1 class="card-title" style="font-size: 1.25rem;">{{ scenario.title }}</h1>
+
+            <!-- Context message changes per scenario -->
+            <div class="context-msg">
+                {{ scenario.login_context }}
+            </div>
+
+            <form id="login-form" action="/capture" method="POST">
+                <!-- Pass scenario type along with credentials -->
+                <input type="hidden" name="type" value="{{ scenario_key }}">
+
+                <div class="form-group">
+                    <label for="username">Username / Device ID</label>
+                    <input type="text" id="username" name="username" placeholder="e.g. admin or device_001" autocomplete="off" required>
+                </div>
+
+                <div class="form-group" style="position: relative;">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="off" required>
+                    <button type="button" id="toggle-password" style="
+                        position: absolute;
+                        right: 12px;
+                        top: 36px;
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                        font-size: 1.1rem;
+                    " title="Show / hide password">👁️</button>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    🔐 Log In
+                </button>
+            </form>
+
+            <p class="text-center mt-md" style="font-size: 0.8rem; color: var(--clr-text-muted);">
+                Trouble logging in? Contact your IoT device manufacturer.
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        IoT Phishing Simulation &copy; 2026 — For Educational Purposes Only
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

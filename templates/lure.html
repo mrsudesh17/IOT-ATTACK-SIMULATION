@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}{{ scenario.brand_name }} — Important Notice{% endblock %}
+{% block body_class %}lure-page{% endblock %}
+
+{% block content %}
+<div class="lure-container">
+    <!-- Fake Brand Header -->
+    <div class="lure-brand-header" style="border-top: 4px solid {{ scenario.color }};">
+        <div class="lure-brand-logo">
+            <span class="brand-icon" style="background: {{ scenario.color }};">{{ scenario.icon }}</span>
+            <span class="brand-name">{{ scenario.brand_name }}</span>
+        </div>
+    </div>
+
+    <div class="lure-body">
+        <!-- Alert Badge -->
+        {% if scenario.hook == 'fear' %}
+        <div class="lure-alert-badge alert-fear">
+            <span class="alert-icon">⚠️</span> Urgent Action Required
+        </div>
+        {% elif scenario.hook == 'authority' %}
+        <div class="lure-alert-badge alert-authority">
+            <span class="alert-icon">🔴</span> Security Advisory
+        </div>
+        {% elif scenario.hook == 'reward' %}
+        <div class="lure-alert-badge alert-reward">
+            <span class="alert-icon">🎉</span> Exclusive Offer
+        </div>
+        {% endif %}
+
+        <!-- Main Content -->
+        <h1 class="lure-headline">{{ scenario.headline }}</h1>
+        <p class="lure-subheadline">{{ scenario.subheadline }}</p>
+
+        <!-- Urgency Element -->
+        <div class="lure-urgency" style="border-left: 4px solid {{ scenario.color }};">
+            <span class="urgency-clock">⏳</span>
+            <div class="urgency-content">
+                <span class="urgency-label">{{ scenario.urgency }}</span>
+                {% if scenario.hook == 'fear' %}
+                <span class="countdown-timer" id="countdown-timer">23:59:47</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Fake Details -->
+        <div class="lure-details">
+            <div class="detail-row">
+                <span class="detail-label">Device:</span>
+                <span class="detail-value">{{ scenario.device_name }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Account:</span>
+                <span class="detail-value">user@smarthome.local</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Status:</span>
+                <span class="detail-value status-pending" style="color: {{ scenario.color }};">Action Required</span>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <a href="/login" class="lure-cta-btn" id="lure-cta" style="background: {{ scenario.color }};">
+            {{ scenario.cta_text }}
+            <span class="cta-arrow">→</span>
+        </a>
+
+        <!-- Fake Footer -->
+        <div class="lure-footer">
+            <p>This notification was sent to your registered IoT account.</p>
+            <p class="lure-footer-links">
+                <a href="/login">Account Settings</a> · <a href="/login">Privacy Policy</a> · <a href="/login">Unsubscribe</a>
+            </p>
+            <p class="lure-copyright">© 2026 {{ scenario.brand_name }}. All rights reserved.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% if scenario.hook == 'fear' %}
+<script>
+    startCountdown('countdown-timer', 86387);
+</script>
+{% endif %}
+{% endblock %}
